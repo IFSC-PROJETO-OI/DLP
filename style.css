@@ -126,7 +126,6 @@ header nav ul li a.active {
     align-items: center;
     justify-content: center;
     white-space: nowrap;
-    cursor: pointer; /* Adicionado para indicar que é clicável */
 }
 
 .dropdown .dropbtn .arrow-down {
@@ -139,10 +138,14 @@ header nav ul li a.active {
     transition: transform 0.3s ease, border-color 0.3s ease;
 }
 
+.dropdown:hover .dropbtn .arrow-down {
+    transform: rotate(225deg);
+}
+
 .dropdown-content {
     opacity: 0; /* Começa invisível */
     visibility: hidden; /* Garante que não é clicável/selecionável quando invisível */
-    transition: opacity 0.3s ease-out, visibility 0s linear 0.3s; /* Transição de 0.3s */
+    transition: opacity 0.3s ease-out, visibility 0.3s ease-out; /* Transição de 0.3s */
 
     position: absolute;
     background-color: var(--secondary-color);
@@ -154,11 +157,10 @@ header nav ul li a.active {
     left: 0;
 }
 
-/* CORREÇÃO: Mostra o dropdown quando a classe .show é adicionada pelo JS */
-.dropdown-content.show {
+/* Quando o mouse está sobre o dropdown (ou seu botão) */
+.dropdown:hover .dropdown-content {
     opacity: 1; /* Torna visível */
     visibility: visible; /* Torna clicável */
-    transition: opacity 0.3s ease-out;
 }
 
 
@@ -538,26 +540,21 @@ footer p {
         width: 100%;
     }
 
-    /* CORREÇÃO: Esconde o dropdown por padrão no mobile para ser controlado por JS */
     .dropdown-content {
-        display: none;
-        position: static;
+        /* MUDANÇAS AQUI PARA MOBILE */
+        opacity: 1; /* Sempre visível em mobile para dropdown aberto por clique */
+        visibility: visible;
+        position: static; /* Volta para fluxo normal */
         width: 100%;
+        transform: translateX(0);
         box-shadow: none;
         border-radius: 0;
         margin-top: 5px;
-        background-color: rgba(255, 255, 255, 0.1); /* Um fundo sutil para os itens do menu */
-        transition: none;
-        /* Sobrescreve as regras de transição do desktop para não haver conflito */
-        opacity: 1;
-        visibility: visible;
+        max-height: none;
+        overflow-y: visible;
+        z-index: auto;
+        transition: none; /* Remove transição para mobile onde display pode ser usado */
     }
-    
-    /* CORREÇÃO: Mostra o dropdown quando a classe .show é adicionada */
-    .dropdown-content.show {
-        display: block;
-    }
-
 
     .dropdown-content a {
         color: var(--header-text-color);
