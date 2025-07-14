@@ -1,4 +1,97 @@
 document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function() {
+    // Lógica para o botão de alternar tema
+    const themeToggle = document.getElementById('theme-toggle');
+    if (themeToggle) {
+        themeToggle.addEventListener('click', function() {
+            document.body.classList.toggle('dark-theme');
+
+            // Salva a preferência do usuário no localStorage
+            if (document.body.classList.contains('dark-theme')) {
+                localStorage.setItem('theme', 'dark');
+            } else {
+                localStorage.setItem('theme', 'light');
+            }
+        });
+    }
+
+    // Carrega o tema salvo quando a página é carregada
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark') {
+        document.body.classList.add('dark-theme');
+    }
+
+    // --- NOVA LÓGICA PARA O MENU HAMBÚRGUER ---
+    const hamburgerMenu = document.getElementById('hamburger-menu');
+    const mainNav = document.querySelector('header nav');
+    const navLinks = document.querySelectorAll('header nav a');
+
+    if (hamburgerMenu && mainNav) {
+        hamburgerMenu.addEventListener('click', function() {
+            mainNav.classList.toggle('active');
+            hamburgerMenu.classList.toggle('active');
+            const isExpanded = hamburgerMenu.getAttribute('aria-expanded') === 'true';
+            hamburgerMenu.setAttribute('aria-expanded', !isExpanded);
+        });
+    }
+    
+    // Fecha o menu ao clicar em um link (útil para SPAs)
+    navLinks.forEach(link => {
+        // Verifica se o link não é o botão do dropdown
+        if (!link.classList.contains('dropbtn')) {
+            link.addEventListener('click', () => {
+                if (mainNav.classList.contains('active')) {
+                    mainNav.classList.remove('active');
+                    hamburgerMenu.classList.remove('active');
+                    hamburgerMenu.setAttribute('aria-expanded', 'false');
+                }
+            });
+        }
+    });
+
+
+    // Lógica para o dropdown de Linguagens
+    const dropdownMenuItem = document.querySelector('li.dropdown');
+    const dropdownContent = document.querySelector('.dropdown-content');
+    const dropbtn = document.querySelector('.dropbtn');
+
+    if (dropdownMenuItem && dropdownContent && dropbtn) {
+        // Evento para telas grandes (desktop)
+        dropdownMenuItem.addEventListener('mouseenter', function() {
+            if (window.innerWidth > 992) { // Só ativa com mouse em telas maiores
+                dropdownContent.classList.add('show');
+            }
+        });
+
+        dropdownMenuItem.addEventListener('mouseleave', function() {
+             if (window.innerWidth > 992) {
+                dropdownContent.classList.remove('show');
+             }
+        });
+        
+        // Evento de clique para telas pequenas (mobile)
+        dropbtn.addEventListener('click', function(event) {
+            if (window.innerWidth <= 992) {
+                event.preventDefault(); // Previne que o link '#' navegue
+                dropdownContent.classList.toggle('show');
+            }
+        });
+
+        // Opcional: Esconder o dropdown ao clicar fora dele
+        document.addEventListener('click', function(event) {
+            if (!dropdownMenuItem.contains(event.target)) {
+                dropdownContent.classList.remove('show');
+            }
+        });
+    }
+
+    // Lógica para o Gráfico de Linhas de Popularidade das Linguagens
+    // ... (o restante do seu código JavaScript permanece o mesmo) ...
+    const ctx = document.getElementById('linguagensChart');
+    if (ctx) {
+        // ...
+    }
+});
     // Lógica para o botão de alternar tema
     const themeToggle = document.getElementById('theme-toggle');
     if (themeToggle) {
