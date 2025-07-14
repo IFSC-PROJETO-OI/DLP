@@ -17,16 +17,15 @@
     --border-radius: 8px; /* Adicionado para bordas arredondadas */
 }
 
-/* Variáveis para TEMA ESCURO*/
 body.dark-theme {
     --primary-color: #388E3C; /* Verde Escuro (COR PRINCIPAL) */
-    --secondary-color: #000000; /* Preto para header/footer */
+    --secondary-color: #1a1a1a; /* ALTERADO: Tom de chumbo para header/footer */
     --accent-color: #f1c40f; /* Amarelo */
     --text-color: #ecf0f1; /* Cor do texto claro para o corpo */
     --light-bg: #121212; /* Fundo principal quase preto */
     --white: #1E1E1E; /* Fundo de seções 'brancas' no tema escuro (cinza bem escuro) */
     --header-text-color: #ffffff; /* Cor do texto do header no tema escuro */
-    --code-bg: #0d0d0d; /* Fundo dos blocos de código mais escuro, quase preto */
+    --code-bg: #222426; /* ALTERADO: Fundo dos blocos de código com um tom levemente azulado */
     --code-text: #f8f8f2; /* Texto dos blocos de código (mantido claro) */
     --border-color: #333333; /* Borda escura */
     --box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6); /* Sombra mais escura */
